@@ -1,0 +1,13 @@
+version: '2'
+services:
+  activemq-message-app-2:
+    image: activemq-message:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m -Dlogging.level.root=INFO -Dspring.activemq.broker-url=tcp://activemq-service:61616 -Dapplication.name="Message Service 2:"
+    ports:
+      - 8091:8080
+  activemq-service:
+    image: rmohr/activemq
+    ports:
+      - 8161:8161
+      - 61616:61616
