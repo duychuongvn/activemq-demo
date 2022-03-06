@@ -1,4 +1,4 @@
-package com.smartdev.activemq.userservice.jms;
+package com.smartdev.activemq.messageservice.jms;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
@@ -25,6 +25,12 @@ public class GreetingReceiver {
         System.out.println(appName + ":: from Topic.Greeting: " + textMessage);
     }
 
+
+    @JmsListener(destination = "Queue.Greeting")
+    public void receiveMessageFromQueue(String textMessage) {
+
+        System.out.println(appName + ":: from Queue.Greeting: " + textMessage);
+    }
 
     @JmsListener(destination = "Queue.Greeting")
     public void receiveMessageFromQueue(String textMessage) {

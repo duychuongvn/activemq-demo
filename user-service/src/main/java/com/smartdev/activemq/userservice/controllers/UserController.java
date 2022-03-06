@@ -1,6 +1,8 @@
 package com.smartdev.activemq.userservice.controllers;
 
+import com.smartdev.activemq.userservice.jms.GreetingProducer;
 import com.smartdev.activemq.userservice.jms.GreetingPublisher;
+import com.smartdev.activemq.userservice.model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ public class UserController {
 
     @Autowired
     private GreetingPublisher greetingPublisher;
+    @Autowired
+    private GreetingProducer greetingProducer;
     @GetMapping("/greeting")
     public String hello(@RequestParam("name") String name, @RequestParam(value = "type", defaultValue = "queue") String type) {
 
@@ -25,5 +29,10 @@ public class UserController {
 
         }
        return "Hello " + name;
+    }
+
+    @GetMapping("/greet-message")
+    public MessageModel greetMessage(@RequestParam("name") String name) {
+        return greetingProducer.greet(name);
     }
 }

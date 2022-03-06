@@ -1,4 +1,4 @@
-package com.smartdev.activemq.userservice;
+package com.smartdev.activemq.messageservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
