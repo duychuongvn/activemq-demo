@@ -3,7 +3,10 @@ spring:
     broker-url: tcp://localhost:61616
     user: admin
     password: admin
-
+org:
+  apache:
+    activemq:
+      SERIALIZABLE_PACKAGES: '*'
 server:
   port: 8080
 

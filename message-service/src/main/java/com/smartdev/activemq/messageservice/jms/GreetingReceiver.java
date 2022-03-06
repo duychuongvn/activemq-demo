@@ -32,10 +32,4 @@ public class GreetingReceiver {
         System.out.println(appName + ":: from Queue.Greeting: " + textMessage);
     }
 
-    @JmsListener(destination = "Queue.Greeting")
-    public void receiveMessageFromQueue(String textMessage) {
-
-        System.out.println(appName + ":: from Queue.Greeting: " + textMessage);
-    }
-
 }
