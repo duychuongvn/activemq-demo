@@ -5,7 +5,7 @@ spring:
     password: admin
 
 server:
-  port: 8080
+  port: 8088
 
 logging:
   level:

@@ -37,17 +37,18 @@ public class JmsConfig {
      *
      * @return Turned off redelivery policy for demo purposes
      */
-//    @Bean
-//    public RedeliveryPolicy redeliveryPolicy() {
-//        RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
-//        redeliveryPolicy.setMaximumRedeliveries(0);
-//
-//        // Note: We must set the queue name here. This name will be part of the error message
-//        // shown in ActiveMQ for a failed message. If we don't set the queue name, we cannot
-//        // see which listener has failed.
+    @Bean
+    public RedeliveryPolicy redeliveryPolicy() {
+        RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
+        redeliveryPolicy.setMaximumRedeliveries(3);
+        redeliveryPolicy.setRedeliveryDelay(5000);
+        redeliveryPolicy.setInitialRedeliveryDelay(2000);
+        // Note: We must set the queue name here. This name will be part of the error message
+        // shown in ActiveMQ for a failed message. If we don't set the queue name, we cannot
+        // see which listener has failed.
 //        redeliveryPolicy.setQueue("Consumer.user-service.VirtualTopic.Events");
-//        return redeliveryPolicy;
-//    }
+        return redeliveryPolicy;
+    }
 
     @Bean
     public ConnectionFactory connectionFactory(@Value("${spring.activemq.user}") String username,
@@ -55,7 +56,7 @@ public class JmsConfig {
                                                @Value("${spring.activemq.broker-url}") String brokerUrl) {
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
-//        connectionFactory.setRedeliveryPolicy(redeliveryPolicy());
+        connectionFactory.setRedeliveryPolicy(redeliveryPolicy());
         connectionFactory.setWatchTopicAdvisories(false);
         return connectionFactory;
     }

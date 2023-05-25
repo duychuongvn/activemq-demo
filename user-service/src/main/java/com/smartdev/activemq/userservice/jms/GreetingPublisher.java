@@ -21,6 +21,11 @@ public class GreetingPublisher {
         jmsTemplate.convertAndSend(new ActiveMQTopic("Topic.Greeting"), message);
     }
 
+    public void publishToTopic(VerypayMessage message) {
+        log.info("Send event. [destination={}, message={}]", "Topic.Greeting", message);
+        jmsTemplate.convertAndSend(new ActiveMQTopic("Topic.Greeting"), message);
+    }
+
     public void publishToQueue(String message) {
         log.info("Send event. [destination={}, message={}]", "Queue.Greeting", message);
         jmsTemplate.convertAndSend("Queue.Greeting", message);

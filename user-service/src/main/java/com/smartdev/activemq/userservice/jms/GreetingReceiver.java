@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import javax.management.JMException;
+
 @Component
 public class GreetingReceiver {
 
@@ -27,9 +29,10 @@ public class GreetingReceiver {
 
 
     @JmsListener(destination = "Queue.Greeting")
-    public void receiveMessageFromQueue(String textMessage) {
-
+    public void receiveMessageFromQueue(String textMessage) throws JMException {
         System.out.println(appName + ":: from Queue.Greeting: " + textMessage);
+
+        throw new IllegalArgumentException(textMessage);
     }
 
 }
